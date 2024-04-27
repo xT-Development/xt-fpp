@@ -123,9 +123,5 @@ function getCamByVehicleType()
 end
 
 function isPlayerAiming()
-    local callback = false
-    if IsPlayerFreeAiming(cache.playerId) or IsControlPressed(0, 25) then
-        callback = true
-    end
-    return callback
+    return (IsPlayerFreeAiming(cache.playerId) or IsControlPressed(0, 25)) and true or false
 end

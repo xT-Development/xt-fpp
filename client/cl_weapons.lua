@@ -2,6 +2,7 @@ local config = require 'config'
 local playerState = LocalPlayer.state
 local SetFollowPedCamViewMode = SetFollowPedCamViewMode
 local IsControlJustReleased =   IsControlJustReleased
+local DisableControlAction =    DisableControlAction
 
 local function weaponLoop(weapon)
     Wait(500)
@@ -33,14 +34,12 @@ local function weaponLoop(weapon)
 end
 
 lib.onCache('weapon', function(value)
-    if not config.forceAimingFPP then
-        return
-    end
+    FPPWeapon, FPPVehicleWeapon = isWeaponFPP(value)
+
+    if not config.forceAimingFPP then return end
+    if not FPPWeapon then return end
 
     if not cache.weapon and value then
-        FPPWeapon, FPPVehicleWeapon = isWeaponFPP(value)
-        if not FPPWeapon then return end
-
         setLastCam()
         weaponLoop(value)
     else

@@ -24,12 +24,29 @@ local function vehicleLoop(vehicle)
     end
 end
 
+local function aimingWhileEntering()
+    CreateThread(function()
+        while true do
+            local isAiming = (FPPVehicleWeapon and isPlayerAiming()) and true or false
+            if isAiming then
+                DisablePlayerFiring(cache.playerId)
+            else break end
+            Wait(1)
+        end
+    end)
+end
+
 lib.onCache('vehicle', function(value)
     if not config.forceDrivingFPP and not config.forceAllPassengersFPP and not config.forceVehicleAimingFPP then
         return
     end
 
     if not cache.vehicle and value then
+        local isAiming = config.forceVehicleAimingFPP and (FPPVehicleWeapon and isPlayerAiming()) or false
+        if isAiming then
+            aimingWhileEntering()
+        end
+
         setLastCam()
         vehicleLoop(value)
     else

@@ -107,9 +107,9 @@ function getCamByVehicleType()
 
     if boat then
         cam = GetCamViewModeForContext(3)
-    elseif	heli then
+    elseif heli then
         cam = GetCamViewModeForContext(6)
-    elseif	plane then
+    elseif plane then
         cam = GetCamViewModeForContext(4)
     elseif subm then
         cam = GetCamViewModeForContext(5)

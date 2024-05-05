@@ -25,16 +25,24 @@ local function vehicleLoop(vehicle)
 end
 
 local function aimingWhileEntering()
+    local canShoot = false
     CreateThread(function()
         while true do
             local isAiming = (FPPVehicleWeapon and isPlayerAiming()) and true or false
             if isAiming then
-                DisablePlayerFiring(cache.playerId)
-            else break end
-            Wait(1)
+                canShoot = false
+            else
+                SetPlayerCanDoDriveBy(cache.playerId, true)
+                break
+            end
+
+            SetPlayerCanDoDriveBy(cache.playerId, canShoot)
+            Wait(100)
         end
     end)
 end
+
+SetPlayerCanDoDriveBy(cache.playerId, true)
 
 lib.onCache('vehicle', function(value)
     if not config.forceDrivingFPP and not config.forceAllPassengersFPP and not config.forceVehicleAimingFPP then

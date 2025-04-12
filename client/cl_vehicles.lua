@@ -15,7 +15,7 @@ local function vehicleLoop(vehicle)
         if forceDriver or forcePassenger or isAiming and currentCam ~= 4 then
             setCamByVehicleType(4)
         else
-            if config.forceVehicleAimingFPP and IsControlJustReleased(0, 25) then
+            if config.forceVehicleAimingFPP and (IsControlJustReleased(0, 25) or IsControlJustReleased(0, 226)) then
                 resetPlayerCam(playerState.lastCam, false)
             end
         end

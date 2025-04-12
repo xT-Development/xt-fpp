@@ -123,5 +123,8 @@ function getCamByVehicleType()
 end
 
 function isPlayerAiming()
+    if not IsUsingKeyboard(0) and cache.vehicle then
+        return (IsPlayerFreeAiming(cache.playerId) or IsControlPressed(0, 226)) and true or false
+    end
     return (IsPlayerFreeAiming(cache.playerId) or IsControlPressed(0, 25)) and true or false
 end

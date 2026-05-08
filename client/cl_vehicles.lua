@@ -26,7 +26,7 @@ local function vehicleLoop()
                 end
             end
 
-            if isAiming or forceDriver or forcePassenger then
+            if (isAiming and FPPVehicleWeapon) or forceDriver or forcePassenger then
                 UTILS.setCamByVehicleType(4)
             end
 

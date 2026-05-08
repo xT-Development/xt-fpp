@@ -98,7 +98,9 @@ function utils.getCamByVehicleType()
 end
 
 function utils.isPlayerAiming()
-    return (IsPlayerFreeAiming(cache.playerId) or IsControlPressed(0, 25)) and true or false
+    if not cache.weapon then return false end
+
+    return IsPlayerFreeAiming(cache.playerId) or IsControlPressed(0, 25)
 end
 
 function utils.getPlayerCam()
